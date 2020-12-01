@@ -3,7 +3,7 @@
 
 Реализовать алгоритм симметричного блочного шифрования camellia
 
-Источники:
+Ресурсы:
   RFC 3713: https://tools.ietf.org/html/rfc3713
   5528: https://www.ietf.org/rfc/rfc5528.txt?number=5528
   Официальный сайт camellia: http://info.isl.ntt.co.jp/crypt/eng/camellia/standard.html
