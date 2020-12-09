@@ -1,9 +1,9 @@
-# ISAP2
+## ISAP2
 Домашняя работа №2 по "Программирование алгоритмов защиты информации"
 
 Реализовать алгоритм симметричного блочного шифрования camellia
 
-Ресурсы:
+# Ресурсы:
 1. RFC 3713: https://tools.ietf.org/html/rfc3713 ;
 2. 5528: https://www.ietf.org/rfc/rfc5528.txt?number=5528 ;
 3. Официальный сайт camellia: http://info.isl.ntt.co.jp/crypt/eng/camellia/standard.html ;
@@ -12,3 +12,6 @@
 
 
 Была использована библиотека больших чисел libtommath
+
+# Немного теории
+![image Algorithm CBC]()
