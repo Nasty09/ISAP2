@@ -14,4 +14,4 @@
 Была использована библиотека больших чисел libtommath
 
 # Немного теории
-![image Algorithm CBC]()
+![image Algorithm CBC Encryption](https://github.com/Nasty09/ISAP2/blob/main/CBC%20Encryption.png)
