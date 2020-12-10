@@ -21,13 +21,16 @@
 
 Реализация CBC хорошо видна на данных картинках:
 ![image Algorithm CBC Encryption - Decryption](https://github.com/Nasty09/ISAP2/blob/main/CBC%20Encryption%20-%20Decryption.png)
+
 Для этого используется доролнительный IV (вектор инициализации). Благодаря этой системе, каждая следующая группа бит зависет от предыдущей, поэтому, если изменить несколько бит, это сразу же станет заметно, т.к. расшифровать уже не получиться.
 
 ## Результаты
 Обычный режим работы шифра:
+
 ![image Algorithm Camellia](https://github.com/Nasty09/ISAP2/blob/main/Rezults_1.png)
 
 Режим работы CBC:
+
 ![image Algorithm CBC Camellia](https://github.com/Nasty09/ISAP2/blob/main/Rezults_2.png)
 
 К сожалению в стандарте 5528 указаны примеры для работы CCM (CBC-MAC), поэтому пришлось проверять отдельно.
