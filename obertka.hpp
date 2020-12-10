@@ -19,11 +19,6 @@ public:
         err = mp_init(&a);
         mp_set_l(&a, _a);
     }
-//    mp(mp_int _a)
-//    {
-//        mp_err err;
-//        err = mp_init_copy(&a,&_a);
-//    }
     mp()
     {
         mp_err err;
@@ -128,31 +123,7 @@ public:
         }
         return (this->MASK(c - b) << b) | (*this >> (c - b));
     }
-//    mp to_bin(int b)
-//    {
-//        mp buf = 0, zero(0);
-//        while (b > 0)
-//        {
-//            buf = (buf << 1 | (*this >> b).MASK(1));
-//            b--;
-//        }
-
-//        return buf;
-//    }
-//    mp rotr(int b) { return (*this >> b) | (*this << (this->size() - b)); }
 };
 #endif
 
-
-//    mp exp(int b)
-//    {
-//        mp c = 1;
-//        int n = 0;
-//        while (n < b)
-//        {
-//            c = *this * c;
-//            n++;
-//        }
-//        return c;
-//    }
 

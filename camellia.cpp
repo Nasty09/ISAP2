@@ -89,6 +89,25 @@ camellia::camellia(mp key, mp argin) : _key(key), _arg(argin)
     }
     else std::cout <<"ERROR\n\n";
 }
+camellia::camellia(mp key, mp data, mp inIV) : _key(key), _data(data), _inIV(inIV)
+{
+    mp KL, KR;
+    _arg = _data;
+    _datasize= _data.size();
+    if (_key.size() <= 128)
+    {
+        KL = _key;
+        KR = 0;
+        this->key128(KL, KR);
+    }
+    else if (_key.size() <= 256)
+    {
+        KL = _key >> 128;
+        KR = _key.MASK(128);
+        this->key256(KL, KR);
+    }
+    else std::cout <<"ERROR\n\n";
+}
 void camellia::Cipher()
 {
     if (_key.size() <= 128) this->Cipher128();
@@ -98,6 +117,40 @@ void camellia::Decipher()
 {
     if (_key.size() <= 128) this->Decipher128();
     else this->Decipher256();
+}
+void camellia::CipherCBC()
+{
+    mp outdata;
+    _arg = _inIV;
+    while (_data.size() > 0)
+    {
+        _arg = _arg ^ (_data >> (_data.size()-128));
+        _data = _data.MASK(_data.size()-128);
+        this->Cipher();
+        outdata = outdata << 128 | _arg;
+    }
+    _arg = outdata;
+    _data = outdata;
+}
+void camellia::DecipherCBC()
+{
+    mp outdata, IV;
+    while (_data.size() > 0)
+    {
+        _arg = _data >> (_data.size()-128);
+        IV = _arg;
+        _data = _data.MASK(_data.size()-128);
+        this->Decipher();
+        if (_datasize < 128) outdata = (outdata << 105) | (_arg ^ _inIV);
+        else
+        {
+            _datasize -= 128;
+            outdata = outdata << 128 | (_arg ^ _inIV);
+        }
+        _inIV = IV;
+    }
+    _arg = outdata;
+    _data = outdata;
 }
 void camellia::key128 (mp KL, mp KR)
 {

@@ -8,41 +8,37 @@ int main()
     mp q256 = "0123456789abcdeffedcba987654321000112233445566778899aabbccddeeff",
             q128 = "0123456789abcdeffedcba9876543210",
             qCBC = "C0C1C2C3C4C5C6C7C8C9CACBCCCDCECF",
-            qCTR = "776BEFF2851DB06F4C8A0542C8696F6C6A81AF1EEC96B4D37FC1D689E6C1C104",
             x = "0123456789abcdeffedcba9876543210",
-            xCBC = "5900000005040302A0A1A2A3A4A50019",
-            xCTR = "53696E676C6520626C6F636B206D7367",
+            xCBC = "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E",
             y256 = "9acc237dff16d76c20ef7c919e3a7509",
             y128 = "67673138549669730857065648eabe43",
-            yCBC = "6F6915DFA6A0DF2484A73788A365F92E",
-            yCTR = "3401F9C8247EFFCEBD6994714C1BBB11";
-    camellia a128(q128,x), a256(q256,x), aCBC(qCBC, xCBC), aCTR(qCTR,xCTR);
+            IV1 = "5900000005040302A0A1A2A3A4A50019",
+            IV2 = "D4DBCD92A89641561D0DBBD0D57F7E1D";
+    camellia a128(q128,x), a256(q256,x), aCBC(qCBC, xCBC, IV1), aCBC2(qCBC, xCBC, IV2);
 
-    std::cout <<"128:\n"<<a128<<"\n";
+    std::cout <<"128:\n"<<a128<<"Out:  "<<y128<<"\n\n";
     a128.Cipher();
     std::cout <<"Cipher:\n"<<a128<<"\n";
     a128.Decipher();
     std::cout <<"Decipher:\n"<<a128<<"\n\n\n";
 
-    std::cout <<"256:\n"<<a256<<"\n";
+    std::cout <<"256:\n"<<a256<<"Out:  "<<y256<<"\n\n";
     a256.Cipher();
     std::cout <<"Cipher:\n"<<a256<<"\n";
     a256.Decipher();
     std::cout <<"Decipher:\n"<<a256<<"\n\n\n";
 
     std::cout <<"CBC:\n"<<aCBC<<"\n";
-    aCBC.Cipher();
+    aCBC.CipherCBC();
     std::cout <<"Cipher:\n"<<aCBC<<"\n";
-    aCBC.Decipher();
+    aCBC.DecipherCBC();
     std::cout <<"Decipher:\n"<<aCBC<<"\n\n\n";
 
-    std::cout <<"CTR:\n"<<aCTR<<"\n";
-    aCTR.Cipher();
-    std::cout <<"Cipher:\n"<<aCTR<<"\n";
-    aCTR.Decipher();
-    std::cout <<"Decipher:\n"<<aCTR<<"\n\n\n";
-
-    std::cout<<yCTR<<"\n";
+    std::cout <<"CBC 2:\n"<<aCBC2<<"\n";
+    aCBC2.CipherCBC();
+    std::cout <<"Cipher:\n"<<aCBC2<<"\n";
+    aCBC2.DecipherCBC();
+    std::cout <<"Decipher:\n"<<aCBC2<<"\n\n\n";
 
     return 0;
 }
