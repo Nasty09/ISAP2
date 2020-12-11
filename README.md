@@ -9,7 +9,7 @@
 3. Официальный сайт camellia: http://info.isl.ntt.co.jp/crypt/eng/camellia/standard.html ;
 4. Книга Панасенко С.П. "Алгоритмы шифрования. Специальный справочник" ;
 5. "Specification of Camellia", написанная авторами шифра: https://info.isl.ntt.co.jp/crypt/eng/camellia/dl/01espec.pdf ;
-6. Инофрмация про режим работы CBC: https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_block_chaining_(CBC) ;
+6. Инофрмация про режим работы CBC: https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38a.pdf ;
 
 Для реализации была использована библиотека больших чисел libtommath
 
