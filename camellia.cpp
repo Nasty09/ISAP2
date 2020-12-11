@@ -124,8 +124,16 @@ void camellia::CipherCBC()
     _arg = _inIV;
     while (_data.size() > 0)
     {
-        _arg = _arg ^ (_data >> (_data.size()-128));
-        _data = _data.MASK(_data.size()-128);
+        if (_data.size() >= 128)
+        {
+            _arg = _arg ^ (_data >> (_data.size()-128));
+            _data = _data.MASK(_data.size()-128);
+        }
+        else
+        {
+            _arg = _arg ^ _data;
+            _data = 0;
+        }
         this->Cipher();
         outdata = outdata << 128 | _arg;
     }
@@ -137,15 +145,23 @@ void camellia::DecipherCBC()
     mp outdata, IV;
     while (_data.size() > 0)
     {
-        _arg = _data >> (_data.size()-128);
+        if (_data.size() % 128 != 0)
+        {
+            _arg = _data >> (_data.size()-_data.size() % 128);
+            _data = _data.MASK(_data.size()-_data.size() % 128);
+        }
+        else
+        {
+            _arg = _data >> (_data.size()-128);
+            _data = _data.MASK(_data.size()-128);
+        }
         IV = _arg;
-        _data = _data.MASK(_data.size()-128);
         this->Decipher();
-        if (_datasize < 128) outdata = (outdata << 105) | (_arg ^ _inIV);
+        if (_datasize < 128) outdata = (outdata << _datasize) | (_arg ^ _inIV);
         else
         {
             _datasize -= 128;
-            outdata = outdata << 128 | (_arg ^ _inIV);
+            outdata = (outdata << 128) | (_arg ^ _inIV);
         }
         _inIV = IV;
     }
