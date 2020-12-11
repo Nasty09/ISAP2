@@ -82,13 +82,6 @@ public:
         err = mp_and(&a, &b.a, &c.a);
         return c;
     }
-    mp operator~ ()
-    {
-        mp b;
-        mp_err err;
-        err = mp_complement(&a, &b.a);
-        return b;
-    }
     friend std::ostream& operator<< (std::ostream& out, const mp A)
     {
         mp_err err;
